@@ -1,0 +1,29 @@
+# Compiled executables
+*.o
+*.out
+*.exe
+
+# Test files
+*-main.c
+test_*
+quick_test*
+verify_*
+compare_*
+all_*
+visualize_*
+exact_test*
+height_visual*
+tree_*
+leaves_*
+node_*
+depth_*
+family_*
+extended_*
+
+# Temporary files
+*~
+.*.swp
+*.swp
+
+# Backup files
+*.bak
