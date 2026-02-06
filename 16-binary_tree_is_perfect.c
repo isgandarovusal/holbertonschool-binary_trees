@@ -1,52 +1,47 @@
 #include "binary_trees.h"
 
 /**
- * check_perfect_recursive - Helper function to check if tree is perfect
- * @tree: Pointer to current node
+ * check_perfect - Helper to check if tree is perfect
+ * @tree: Current node
  * @depth: Current depth
- * @leaf_level: Level of first leaf found
+ * @leaf_level: First leaf level
  *
  * Return: 1 if perfect, 0 otherwise
  */
-int check_perfect_recursive(const binary_tree_t *tree, int depth, int *leaf_level)
+int check_perfect(const binary_tree_t *tree, int depth, int *leaf_level)
 {
-	if (tree == NULL)
+	if (!tree)
 		return (1);
 
-	/* Leaf node */
-	if (tree->left == NULL && tree->right == NULL)
+	if (!tree->left && !tree->right)
 	{
-		/* First leaf found */
 		if (*leaf_level == -1)
 		{
 			*leaf_level = depth;
 			return (1);
 		}
-		/* Check if leaf at same level as first leaf */
 		return (depth == *leaf_level);
 	}
 
-	/* Internal node must have 2 children in perfect tree */
-	if (tree->left == NULL || tree->right == NULL)
+	if (!tree->left || !tree->right)
 		return (0);
 
-	/* Check both subtrees recursively */
-	return (check_perfect_recursive(tree->left, depth + 1, leaf_level) &&
-		check_perfect_recursive(tree->right, depth + 1, leaf_level));
+	return (check_perfect(tree->left, depth + 1, leaf_level) &&
+		check_perfect(tree->right, depth + 1, leaf_level));
 }
 
 /**
  * binary_tree_is_perfect - Checks if a binary tree is perfect
- * @tree: Pointer to the root node of the tree to check
+ * @tree: Pointer to root node
  *
- * Return: 1 if tree is perfect, 0 otherwise or if tree is NULL
+ * Return: 1 if perfect, 0 otherwise
  */
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
 	int leaf_level = -1;
 
-	if (tree == NULL)
+	if (!tree)
 		return (0);
 
-	return (check_perfect_recursive(tree, 0, &leaf_level));
+	return (check_perfect(tree, 0, &leaf_level));
 }
